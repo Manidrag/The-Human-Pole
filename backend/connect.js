@@ -22,24 +22,33 @@ mongoose.connect('mongodb+srv://mani:yUo5tEJNJqFmfLl5@cluster0.93ngq.mongodb.net
  * Create a new poll.
  * Expects: { creatorEmail, question, options: [ 'Option 1', 'Option 2', ... ] }
  */
+// server/server.js
 app.post('/api/polls', async (req, res) => {
-  const { question, options, creatorEmail } = req.body;
-  if (!question || !options || !Array.isArray(options) || options.length < 2 || !creatorEmail) {
+  const { question, options, creatorEmail, creatorName } = req.body;
+  if (
+    !question ||
+    !options ||
+    !Array.isArray(options) ||
+    options.length < 2 ||
+    !creatorEmail ||
+    !creatorName
+  ) {
     return res.status(400).json({
       error:
-        'Invalid poll data. A question, at least two options, and creator email are required.'
+        'Invalid poll data. A question, at least two options, creator email, and creator name are required.'
     });
   }
   const pollOptions = options.map(opt => ({ option: opt, votes: 0 }));
-  const poll = new Poll({ question, options: pollOptions, creatorEmail });
+  const poll = new Poll({ question, options: pollOptions, creatorEmail, creatorName });
   try {
     const savedPoll = await poll.save();
     res.status(201).json(savedPoll);
   } catch (err) {
-    console.error(err);
+    console.error('Error saving poll:', err);
     res.status(500).json({ error: 'Error saving poll.' });
   }
 });
+
 
 /**
  * List all active polls.

@@ -13,7 +13,7 @@ const Poll = ({ poll }) => {
       return;
     }
     try {
-      const response = await fetch(`https://backend-note-7mgo.onrender.com/api/polls/${poll._id}/vote`, {
+      const response = await fetch(`http://localhost:3000/api/polls/${poll._id}/vote`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ const Poll = ({ poll }) => {
   // Cancel the poll (only for the creator)
   const cancelPoll = async () => {
     try {
-      const response = await fetch(`https://backend-note-7mgo.onrender.com/api/polls/${poll._id}/cancel`, {
+      const response = await fetch(`http://localhost:3000/api/polls/${poll._id}/cancel`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const Poll = ({ poll }) => {
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/polls/${poll._id}`);
+        const response = await fetch(`http://localhost:3000/api/polls/${poll._id}`);
         if (response.ok) {
           const updatedPoll = await response.json();
           setPollData(updatedPoll);

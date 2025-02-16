@@ -1,3 +1,4 @@
+// server/models/Poll.js
 const mongoose = require('mongoose');
 
 const PollSchema = new mongoose.Schema(
@@ -9,11 +10,12 @@ const PollSchema = new mongoose.Schema(
         votes: { type: Number, default: 0 }
       }
     ],
-    // Array of emails that have voted (each email can vote once)
+    // Array to store emails that have voted
     voters: [{ type: String }],
-    // The creator's email (required to create/cancel the poll)
+    // Poll creator information:
     creatorEmail: { type: String, required: true },
-    // Poll remains active until the creator cancels it
+    creatorName: { type: String, required: true },  // New field for the username
+    // Active flag (poll remains active until canceled by creator)
     isActive: { type: Boolean, default: true }
   },
   { timestamps: true }
