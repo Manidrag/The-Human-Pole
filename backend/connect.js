@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://mani:yUo5tEJNJqFmfLl5@cluster0.93ngq.mongodb.net/The_Poll', {
+mongoose.connect('URL', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
