@@ -1,0 +1,10 @@
+# Polling App
+
+This project is a full-stack polling application built with Node.js, Express, MongoDB, and React.
+Features include:
+- **One vote per email:** Each email address can vote only once on a poll.
+- **Poll creation with email:** A user must supply their email when creating a poll.
+- **Active polls on the front page:** All active polls are listed for users to view and vote on.
+- **Poll remains open until canceled:** A poll remains active until the creator (identified by email) cancels it.
+
+
